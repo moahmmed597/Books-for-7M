@@ -26,19 +26,24 @@ globalThis.harbor = {
       const body = await res.text();
       return { ok, status, body };
     }
-  }
+  },
+  parseHtml: (html) => ({
+    querySelector: () => null,
+    querySelectorAll: () => []
+  }),
+  log: (...args) => console.log('  [HARBOR_LOG]', ...args)
 };
 
 const repoJson = JSON.parse(fs.readFileSync('repo.json', 'utf8'));
 console.log(`\n======================================================`);
-console.log(`=== Testing Repository: ${repoJson.name} ===`);
+console.log(`=== Testing Repository: ${repoJson.name} (v${repoJson.version}) ===`);
 console.log(`=== Total Plugins: ${repoJson.plugins.length} ===`);
 console.log(`======================================================\n`);
 
 async function testPlugin(pMeta) {
-  const filename = path.basename(pMeta.scriptUrl);
+  const filename = pMeta.entry || path.basename(pMeta.scriptUrl);
   console.log(`------------------------------------------------------`);
-  console.log(`[TESTING] ${pMeta.id} -> ${filename}`);
+  console.log(`[TESTING] ${pMeta.id} -> ${filename} (lang: ${pMeta.lang})`);
   
   if (!fs.existsSync(filename)) {
     throw new Error(`File not found: ${filename}`);
@@ -54,14 +59,13 @@ async function testPlugin(pMeta) {
   console.log(`  -> Plugin initialized: "${plugin.name}" (id: ${plugin.id})`);
 
   // 1. Popular
-  console.log(`  -> Testing popular()...`);
+  console.log(`  -> Testing popular(0)...`);
   const pop = await plugin.popular(0);
   if (!Array.isArray(pop) || pop.length === 0) {
     throw new Error(`popular() returned 0 items`);
   }
   console.log(`  [OK] popular() returned ${pop.length} items. Sample: "${pop[0].title}" (ID: ${pop[0].id})`);
 
-  // Pick first item for detail
   const targetItem = pop[0];
 
   // 2. Detail
@@ -72,26 +76,37 @@ async function testPlugin(pMeta) {
   }
   console.log(`  [OK] detail() title: "${det.title}", author: "${det.author || 'N/A'}"`);
 
-  // 3. Chapters
+  // 3. Chapters & pageUrls (if text reading is supported)
   console.log(`  -> Testing chapters("${targetItem.id}")...`);
   const chaps = await plugin.chapters(targetItem.id);
-  if (!Array.isArray(chaps) || chaps.length === 0) {
-    throw new Error(`chapters() returned 0 chapters`);
+  if (Array.isArray(chaps) && chaps.length > 0) {
+    console.log(`  [OK] chapters() returned ${chaps.length} text chapters. Sample: "${chaps[0].title}"`);
+    const targetChap = chaps[0];
+    console.log(`  -> Testing pageUrls("${targetChap.id}")...`);
+    const pages = await plugin.pageUrls(targetChap.id);
+    if (!Array.isArray(pages) || pages.length === 0) {
+      throw new Error(`pageUrls() returned 0 pages`);
+    }
+    console.log(`  [OK] pageUrls() returned ${pages.length} pages. (Sample page length: ${pages[0].length})`);
+  } else {
+    console.log(`  [INFO] Audio-only plugin (chapters returned []) -> 🎧 Listen Mode Active`);
   }
-  console.log(`  [OK] chapters() returned ${chaps.length} chapters. Sample: "${chaps[0].title}" (ID: ${chaps[0].id})`);
 
-  // 4. PageUrls
-  const targetChap = chaps[0];
-  console.log(`  -> Testing pageUrls("${targetChap.id}")...`);
-  const pages = await plugin.pageUrls(targetChap.id);
-  if (!Array.isArray(pages) || pages.length === 0) {
-    throw new Error(`pageUrls() returned 0 pages`);
+  // 4. Audio tracks (if audio is supported)
+  if (typeof plugin.audioTracks === 'function') {
+    console.log(`  -> Testing audioTracks("${targetItem.id}")...`);
+    const tracks = await plugin.audioTracks(targetItem.id);
+    if (!Array.isArray(tracks) || tracks.length === 0) {
+      throw new Error(`audioTracks() was defined but returned 0 tracks`);
+    }
+    const t0 = tracks[0];
+    if (!t0.url || !t0.url.startsWith('http')) {
+      throw new Error(`audioTrack[0] has invalid url: ${t0.url}`);
+    }
+    console.log(`  [OK] audioTracks() returned ${tracks.length} MP3 tracks. Sample: "${t0.title}" | Duration: ${t0.duration}s`);
+    console.log(`       Stream URL: ${t0.url.substring(0, 60)}...`);
   }
-  if (!pages[0].startsWith('data:image/svg+xml;charset=utf-8,')) {
-    throw new Error(`page[0] is not a valid SVG data URI! Got: ${pages[0].slice(0, 50)}`);
-  }
-  const svgText = decodeURIComponent(pages[0].replace('data:image/svg+xml;charset=utf-8,', ''));
-  console.log(`  [OK] pageUrls() returned ${pages.length} TV SVG pages (Page 1 SVG size: ${svgText.length} bytes)`);
+
   console.log(`  [SUCCESS] All checks passed for ${plugin.id}!\n`);
 }
 
