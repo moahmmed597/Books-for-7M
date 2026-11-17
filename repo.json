@@ -1,0 +1,71 @@
+{
+  "name": "7M Books & Novels - كتب وروايات",
+  "author": "7M Team",
+  "description": "مستودع الكتب والروايات المترجمة والعالمية لتطبيق 7M على الشاشات الذكية مع محرك العرض عالي الدقة",
+  "version": "1.0.0",
+  "plugins": [
+    {
+      "id": "kolnovel-ar",
+      "name": "ملوك الروايات (KolNovel - شامل)",
+      "version": "1.0.0",
+      "description": "المكتبة الشاملة للروايات المترجمة (أكثر من 2000 رواية بجميع التصنيفات)",
+      "author": "7M",
+      "icon": "https://kolnovel.com/favicon.ico",
+      "scriptUrl": "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/kolnovel.plugin.js"
+    },
+    {
+      "id": "fantasy-novels-ar",
+      "name": "روايات الفانتازيا والسحر والغموض (Fantasy & Mystery)",
+      "version": "1.0.0",
+      "description": "روايات الفانتازيا والغموض الملحمية مثل سيد الغموض وذا ويتشر ومجنون الإنسانية",
+      "author": "7M",
+      "icon": "https://kolnovel.com/favicon.ico",
+      "scriptUrl": "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/fantasy-novels.plugin.js"
+    },
+    {
+      "id": "system-novels-ar",
+      "name": "روايات الأنظمة والأبراج والآكشن (System & Action)",
+      "version": "1.0.0",
+      "description": "روايات الصيادين، الأبراج، والأنظمة الافتراضية مثل سولو ليفلينج ووجهة نظر القارئ العليم",
+      "author": "7M",
+      "icon": "https://kolnovel.com/favicon.ico",
+      "scriptUrl": "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/system-novels.plugin.js"
+    },
+    {
+      "id": "martial-novels-ar",
+      "name": "روايات الفنون القتالية والزراعة (Martial & Xianxia)",
+      "version": "1.0.0",
+      "description": "روايات الووشيا والشيانشيا وزراعة الخلود وعوالم السيف والداو",
+      "author": "7M",
+      "icon": "https://kolnovel.com/favicon.ico",
+      "scriptUrl": "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/martial-novels.plugin.js"
+    },
+    {
+      "id": "completed-novels-ar",
+      "name": "الروايات المكتملة (Completed Novels)",
+      "version": "1.0.0",
+      "description": "روايات كاملة ومنتهية القراءة دون انتظار فصول جديدة",
+      "author": "7M",
+      "icon": "https://kolnovel.com/favicon.ico",
+      "scriptUrl": "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/completed-novels.plugin.js"
+    },
+    {
+      "id": "wuxiaworld-en",
+      "name": "WuxiaWorld (English Web Novels)",
+      "version": "1.0.0",
+      "description": "The largest English web novel portal (Action, Cultivation, Fantasy, System)",
+      "author": "7M",
+      "icon": "https://www.wuxiaworld.com/favicon.ico",
+      "scriptUrl": "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/wuxiaworld.plugin.js"
+    },
+    {
+      "id": "standard-ebooks-en",
+      "name": "Standard Ebooks (Classic Literature)",
+      "version": "1.0.0",
+      "description": "Free, beautifully formatted classic literature and novels in English",
+      "author": "7M",
+      "icon": "https://standardebooks.org/favicon.ico",
+      "scriptUrl": "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/standard-ebooks.plugin.js"
+    }
+  ]
+}
