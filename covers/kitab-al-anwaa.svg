@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <defs>
+    <linearGradient id="sky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050814"/>
+      <stop offset="50%" stop-color="#0a122c"/>
+      <stop offset="100%" stop-color="#030611"/>
+    </linearGradient>
+    <radialGradient id="nebula" cx="50%" cy="35%" r="45%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#sky)"/>
+  <rect width="100%" height="100%" fill="url(#nebula)"/>
+  <rect x="25" y="25" width="550" height="850" rx="12" fill="none" stroke="#f59e0b" stroke-width="2.5" opacity="0.8"/>
+  <rect x="35" y="35" width="530" height="830" rx="8" fill="none" stroke="#38bdf8" stroke-width="1" opacity="0.4"/>
+  
+  <!-- Constellation art -->
+  <circle cx="300" cy="280" r="110" fill="none" stroke="#f59e0b" stroke-dasharray="4,6" opacity="0.5"/>
+  <circle cx="300" cy="280" r="4" fill="#38bdf8"/>
+  <circle cx="260" cy="230" r="3" fill="#fef08a"/>
+  <circle cx="350" cy="240" r="3" fill="#fef08a"/>
+  <circle cx="240" cy="310" r="3" fill="#fef08a"/>
+  <circle cx="340" cy="330" r="3" fill="#fef08a"/>
+  <circle cx="300" cy="350" r="3.5" fill="#38bdf8"/>
+  <line x1="260" y1="230" x2="300" y2="280" stroke="#38bdf8" stroke-width="1" opacity="0.6"/>
+  <line x1="350" y1="240" x2="300" y2="280" stroke="#38bdf8" stroke-width="1" opacity="0.6"/>
+  <line x1="240" y1="310" x2="300" y2="280" stroke="#38bdf8" stroke-width="1" opacity="0.6"/>
+  <line x1="340" y1="330" x2="300" y2="280" stroke="#38bdf8" stroke-width="1" opacity="0.6"/>
+  
+  <text x="300" y="140" font-family="'Segoe UI', Tahoma, Arial, sans-serif" font-size="20" fill="#93c5fd" font-weight="600" text-anchor="middle" letter-spacing="4">تراث الفلك وعلم النجوم</text>
+  <text x="300" y="470" font-family="'Segoe UI', Tahoma, Arial, sans-serif" font-size="44" fill="#fef08a" font-weight="bold" text-anchor="middle">كتاب الأنواء</text>
+  <text x="300" y="525" font-family="'Segoe UI', Tahoma, Arial, sans-serif" font-size="24" fill="#e0f2fe" text-anchor="middle">في مواسم العرب ومطالع النجوم والكون</text>
+  
+  <line x1="180" y1="565" x2="420" y2="565" stroke="#f59e0b" stroke-width="1.5" opacity="0.7"/>
+  
+  <text x="300" y="630" font-family="'Segoe UI', Tahoma, Arial, sans-serif" font-size="26" fill="#f8fafc" font-weight="bold" text-anchor="middle">أبو محمد عبد الله بن قتيبة الدينوري</text>
+  <text x="300" y="670" font-family="'Segoe UI', Tahoma, Arial, sans-serif" font-size="18" fill="#94a3b8" text-anchor="middle">(213 هـ - 276 هـ)</text>
+  
+  <text x="300" y="820" font-family="'Segoe UI', Tahoma, Arial, sans-serif" font-size="16" fill="#38bdf8" text-anchor="middle" letter-spacing="2">7M CLASSIC SCIENCE LIBRARY</text>
+</svg>

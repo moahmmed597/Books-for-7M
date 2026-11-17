@@ -69,7 +69,7 @@ const HYBRID_BOOKS = [
     sePath: "bram-stoker/dracula",
     librivoxId: "271",
     description: "التحفة القوطية الكلاسيكية الخالدة؛ عش تجربة مطاردة الكونت دراكولا عبر صفحات النص المقروء والتسجيل الصوتي الدرامي المتقن في آنٍ واحد.",
-    cover: "https://standardebooks.org/ebooks/bram-stoker/dracula/downloads/cover-thumbnail.jpg"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/dracula.jpg"
   },
   {
     id: "frankenstein",
@@ -78,7 +78,7 @@ const HYBRID_BOOKS = [
     sePath: "mary-shelley/frankenstein",
     librivoxId: "2030",
     description: "الرواية التأسيسية لأدب الخيال العلمي؛ قصة فيكتور فرانكنشتاين وطموحه لصناعة الحياة والصراع المأساوي مع مخلوقه.",
-    cover: "https://standardebooks.org/ebooks/mary-shelley/frankenstein/downloads/cover-thumbnail.jpg"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/frankenstein.jpg"
   },
   {
     id: "the-time-machine",
@@ -87,7 +87,7 @@ const HYBRID_BOOKS = [
     sePath: "h-g-wells/the-time-machine",
     librivoxId: "5618",
     description: "رحلة ملحمية عبر الزمان إلى مستقبل البشرية السحيق؛ استكشف حضارة الإيلوي والمورلوك تحت الأرض نصاً وصوتاً.",
-    cover: "https://standardebooks.org/ebooks/h-g-wells/the-time-machine/downloads/cover-thumbnail.jpg"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/time-machine.jpg"
   },
   {
     id: "a-study-in-scarlet",
@@ -96,7 +96,7 @@ const HYBRID_BOOKS = [
     sePath: "arthur-conan-doyle/a-study-in-scarlet",
     librivoxId: "2452",
     description: "أول ظهور للأسطورة شارلوك هولمز والدكتور واطسون في 221B بيكر ستريت؛ أول لغز جريمة غامضة يبهر العالم بأسلوب الاستنتاج الباهر.",
-    cover: "https://standardebooks.org/ebooks/arthur-conan-doyle/a-study-in-scarlet/downloads/cover-thumbnail.jpg"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/study-in-scarlet.jpg"
   },
   {
     id: "the-picture-of-dorian-gray",
@@ -105,7 +105,7 @@ const HYBRID_BOOKS = [
     sePath: "oscar-wilde/the-picture-of-dorian-gray",
     librivoxId: "6124",
     description: "رواية أوسكار وايلد الفلسفية الشهيرة عن الفن والجمال الأبدي وثمن بيع الروح للشباب الدائم.",
-    cover: "https://standardebooks.org/ebooks/oscar-wilde/the-picture-of-dorian-gray/downloads/cover-thumbnail.jpg"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/dorian-gray.jpg"
   }
 ];
 
@@ -162,35 +162,54 @@ function splitIntoPages(rawText) {
   return pages.length ? pages : [cleanInline(rawText)];
 }
 
-function renderSvgPage(title, textChunk, pageNum, totalPages) {
-  const safeTitle = cleanText(title).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  const formattedHtml = textChunk
+function cleanXmlEntities(str) {
+  return String(str || "")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/&rsquo;/gi, "'")
+    .replace(/&lsquo;/gi, "'")
+    .replace(/&rdquo;/gi, '"')
+    .replace(/&ldquo;/gi, '"')
+    .replace(/&#8211;/gi, "–")
+    .replace(/&#8212;/gi, "—")
+    .replace(/&mdash;/gi, "—")
+    .replace(/&#8230;/gi, "...")
+    .replace(/&hellip;/gi, "...")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\n\n/g, "<br/><br/>");
+    .replace(/>/g, "&gt;");
+}
+
+function renderSvgPage(title, textChunk, pageNum, totalPages) {
+  const safeTitle = cleanXmlEntities(cleanText(title));
+  const paragraphs = textChunk.split(/\n\n+/).filter(Boolean);
+  const formattedHtml = paragraphs.map(p => {
+    return `<p style="margin: 0 0 16px 0; text-indent: 1.5em; text-align: justify;">${cleanXmlEntities(p)}</p>`;
+  }).join("");
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#141a29"/>
-      <stop offset="100%" stop-color="#070a12"/>
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#030712"/>
     </linearGradient>
   </defs>
   <rect width="100%" height="100%" fill="url(#bg)"/>
-  <rect x="50" y="30" width="1180" height="660" rx="16" fill="#1b2336" stroke="#2e3b59" stroke-width="1.5"/>
+  <rect x="50" y="30" width="1180" height="660" rx="16" fill="#111827" stroke="#1f2937" stroke-width="1.5"/>
   
-  <text x="640" y="78" font-family="'Segoe UI', Georgia, serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="middle">${safeTitle}</text>
-  <line x1="90" y1="102" x2="1190" y2="102" stroke="#2e3b59" stroke-width="1"/>
+  <text x="640" y="78" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Georgia', Roboto, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="middle">${safeTitle}</text>
+  <line x1="90" y1="102" x2="1190" y2="102" stroke="#1f2937" stroke-width="1"/>
 
   <foreignObject x="90" y="125" width="1100" height="495">
-    <div xmlns="http://www.w3.org/1999/xhtml" style="color: #f1f5f9; font-family: 'Segoe UI', Georgia, serif; font-size: 24px; line-height: 1.85; direction: ltr; text-align: left; padding: 10px 15px;">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Georgia', Roboto, sans-serif; font-size: 24px; line-height: 1.85; direction: ltr; padding: 10px 15px;">
       ${formattedHtml}
     </div>
   </foreignObject>
 
-  <line x1="90" y1="635" x2="1190" y2="635" stroke="#2e3b59" stroke-width="1"/>
-  <text x="640" y="663" font-family="Arial, sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle">Page ${pageNum} of ${totalPages} · 🎧 Listen Sync</text>
+  <line x1="90" y1="635" x2="1190" y2="635" stroke="#1f2937" stroke-width="1"/>
+  <text x="640" y="663" font-family="-apple-system, Arial, sans-serif" font-size="16" fill="#9ca3af" text-anchor="middle">Page ${pageNum} of ${totalPages} · 🎧 Listen Sync</text>
 </svg>`;
 
   return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);

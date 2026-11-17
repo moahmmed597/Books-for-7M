@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f0717"/>
+      <stop offset="50%" stop-color="#240e34"/>
+      <stop offset="100%" stop-color="#0b0412"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="38%" r="50%">
+      <stop offset="0%" stop-color="#c084fc" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#bg)"/>
+  <rect width="100%" height="100%" fill="url(#glow)"/>
+  <rect x="25" y="25" width="550" height="850" rx="10" fill="none" stroke="#d8b4fe" stroke-width="2" opacity="0.6"/>
+  <rect x="35" y="35" width="530" height="830" rx="8" fill="none" stroke="#a855f7" stroke-width="1" opacity="0.4"/>
+  
+  <text x="300" y="150" font-family="'Segoe UI', Tahoma, Arial, sans-serif" font-size="20" fill="#e9d5ff" font-weight="600" text-anchor="middle" letter-spacing="4">روايات الأدب والدراما الاجتماعية</text>
+  
+  <text x="300" y="410" font-family="'Segoe UI', Tahoma, Arial, sans-serif" font-size="52" fill="#ffffff" font-weight="bold" text-anchor="middle">أحلام ممنوعة</text>
+  
+  <line x1="200" y1="470" x2="400" y2="470" stroke="#c084fc" stroke-width="2" opacity="0.8"/>
+  <text x="300" y="520" font-family="'Segoe UI', Tahoma, Arial, sans-serif" font-size="22" fill="#d8b4fe" text-anchor="middle">رواية مسموعة كاملة</text>
+  
+  <text x="300" y="650" font-family="'Segoe UI', Tahoma, Arial, sans-serif" font-size="30" fill="#ffffff" font-weight="bold" text-anchor="middle">نور عبد الحميد</text>
+  <text x="300" y="690" font-family="'Segoe UI', Tahoma, Arial, sans-serif" font-size="18" fill="#9ca3af" text-anchor="middle">روايات معاصرة</text>
+  
+  <text x="300" y="820" font-family="'Segoe UI', Tahoma, Arial, sans-serif" font-size="16" fill="#c084fc" text-anchor="middle" letter-spacing="2">7M ARABIC AUDIO LIBRARY</text>
+</svg>

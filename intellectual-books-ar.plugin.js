@@ -87,70 +87,70 @@ const CURATED_BOOKS = [
     title: "مقدمة ابن خلدون (ديوان المبتدأ والخبر في تاريخ العرب والبربر)",
     author: "عبد الرحمن بن خلدون",
     description: "أعظم كتاب في فلسفة التاريخ وعلم الاجتماع البشري ونشأة الحضارات والدول وقوانين العمران البشري.",
-    cover: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Ibn_Khaldun_monument%2C_Tunis.jpg/400px-Ibn_Khaldun_monument%2C_Tunis.jpg"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/ibn-khaldun.jpg"
   },
   {
     id: "11055",
     title: "تهافت الفلاسفة",
     author: "أبو حامد الغزالي",
     description: "أشهر مؤلف فلسفي نقدي في تاريخ الفكر الإسلامي والعالمي، يناقش فيه الغزالي آراء أرسطو والفارابي وابن سينا في نشأة الكون والزمان وما وراء الطبيعة.",
-    cover: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Al-Ghazali.jpg/400px-Al-Ghazali.jpg"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/tahafut-al-falasifa.jpg"
   },
   {
     id: "26537",
     title: "كليلة ودمنة (حكمة الفلسفة والأخلاق والسياسة)",
     author: "عبد الله بن المقفع",
     description: "من أخلد كتب الحكمة والفلسفة الأخلاقية والسياسية في التراث العالمي المترجم إلى العربية بأسلوب أدبي حكيم.",
-    cover: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Kalila_wa_Dimna_manuscript.jpg/400px-Kalila_wa_Dimna_manuscript.jpg"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/kalila-wa-dimna.jpg"
   },
   {
     id: "12834",
     title: "رسائل فلسفية (في المكان، الزمان، والمادة)",
     author: "أبو بكر محمد بن زكريا الرازي",
     description: "رسائل فلسفية تأسيسية في الفلسفة الطبيعية ونظرية المعرفة، وبحث في طبيعة الفضاء المطلق والزمان والمادة.",
-    cover: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Rhazes.jpg/400px-Rhazes.jpg"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/al-razi-falsafa.jpg"
   },
   {
     id: "1112",
     title: "كتاب المغالطات المنطقية (فصول في التفكير النقدي)",
     author: "نخبة من أساتذة المنطق",
     description: "دليل تطبيقي شامل لكشف المغالطات الفكرية في الحوار، ودراسة قواعد المنطق الصوري والاستدلال السليم.",
-    cover: "https://shamela.ws/favicon.ico"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/maghalatat-mantiqiyya.jpg"
   },
   {
     id: "26575",
     title: "معيار العلم في فن المنطق",
     author: "أبو حامد الغزالي",
     description: "كتاب يوضح موازين العقل ومسالك الأقيسة والبراهين ومبادئ التعريفات المنطقية وفلسفة المعرفة.",
-    cover: "https://shamela.ws/favicon.ico"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/miyar-al-ilm.jpg"
   },
   {
     id: "26538",
     title: "محك النظر في المنطق والفلسفة",
     author: "أبو حامد الغزالي",
     description: "كتاب منهجي في قواعد النظر العقلي والحدود والبراهين ودحض الشبهات الفلسفية.",
-    cover: "https://shamela.ws/favicon.ico"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/mihakk-al-nazar.jpg"
   },
   {
     id: "7227",
     title: "كتاب السياسة",
     author: "ابن سينا (الشيخ الرئيس)",
     description: "رسالة فلسفية لابن سينا في تدبير الرجل نفسه وتدبير منزله وأخلاقه وعلاقاته في المجتمع والدولة.",
-    cover: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Avicenna_Portrait.jpg/400px-Avicenna_Portrait.jpg"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/kitab-al-siyasa.jpg"
   },
   {
     id: "37540",
     title: "الأدب الصغير والأدب الكبير",
     author: "عبد الله بن المقفع",
     description: "تحفة فلسفية تربوية في رياضة العقل، حفظ المروءة، وتدبير الحياة والتعامل مع النفس والسلطان والأصدقاء.",
-    cover: "https://shamela.ws/favicon.ico"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/al-adab-al-saghir.jpg"
   },
   {
     id: "11995",
     title: "تاريخ الخلفاء",
     author: "جلال الدين السيوطي",
     description: "أحد أشهر المراجع التاريخية التي تؤرخ لتحولات الفكر والسياسة عبر العصور الإسلامية المتعاقبة.",
-    cover: "https://shamela.ws/favicon.ico"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/tarikh-al-khulafa.jpg"
   }
 ];
 
@@ -179,35 +179,54 @@ function splitIntoPages(rawText) {
   return pages.length ? pages : [cleanInline(rawText)];
 }
 
-function renderSvgPage(title, textChunk, pageNum, totalPages) {
-  const safeTitle = cleanText(title).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  const formattedHtml = textChunk
+function cleanXmlEntities(str) {
+  return String(str || "")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/&rsquo;/gi, "'")
+    .replace(/&lsquo;/gi, "'")
+    .replace(/&rdquo;/gi, '"')
+    .replace(/&ldquo;/gi, '"')
+    .replace(/&#8211;/gi, "–")
+    .replace(/&#8212;/gi, "—")
+    .replace(/&mdash;/gi, "—")
+    .replace(/&#8230;/gi, "...")
+    .replace(/&hellip;/gi, "...")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\n\n/g, "<br/><br/>");
+    .replace(/>/g, "&gt;");
+}
+
+function renderSvgPage(title, textChunk, pageNum, totalPages) {
+  const safeTitle = cleanXmlEntities(cleanText(title));
+  const paragraphs = textChunk.split(/\n\n+/).filter(Boolean);
+  const formattedHtml = paragraphs.map(p => {
+    return `<p style="margin: 0 0 16px 0; text-indent: 1.5em; text-align: justify; line-height: 2.0;">${cleanXmlEntities(p)}</p>`;
+  }).join("");
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#15131b"/>
-      <stop offset="100%" stop-color="#0a0810"/>
+      <stop offset="0%" stop-color="#110d1a"/>
+      <stop offset="100%" stop-color="#06040a"/>
     </linearGradient>
   </defs>
   <rect width="100%" height="100%" fill="url(#bg)"/>
-  <rect x="50" y="30" width="1180" height="660" rx="16" fill="#1e1b26" stroke="#3b324d" stroke-width="1.5"/>
+  <rect x="50" y="30" width="1180" height="660" rx="16" fill="#181324" stroke="#3b2d54" stroke-width="1.5"/>
   
-  <text x="640" y="78" font-family="'Segoe UI', Tahoma, Arial, sans-serif" font-size="22" font-weight="bold" fill="#a855f7" text-anchor="middle" direction="rtl">${safeTitle}</text>
-  <line x1="90" y1="102" x2="1190" y2="102" stroke="#3b324d" stroke-width="1"/>
+  <text x="640" y="78" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Cairo', 'Noto Sans Arabic', 'Tajawal', Roboto, sans-serif" font-size="22" font-weight="bold" fill="#c084fc" text-anchor="middle" direction="rtl">${safeTitle}</text>
+  <line x1="90" y1="102" x2="1190" y2="102" stroke="#3b2d54" stroke-width="1"/>
 
   <foreignObject x="90" y="125" width="1100" height="495">
-    <div xmlns="http://www.w3.org/1999/xhtml" style="color: #f3f4f6; font-family: 'Segoe UI', Tahoma, Arial, sans-serif; font-size: 24px; line-height: 1.9; direction: rtl; text-align: justify; padding: 10px 15px;">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Cairo', 'Noto Sans Arabic', 'Tajawal', Roboto, sans-serif; font-size: 24px; line-height: 2.0; direction: rtl; text-align: justify; padding: 10px 15px;">
       ${formattedHtml}
     </div>
   </foreignObject>
 
-  <line x1="90" y1="635" x2="1190" y2="635" stroke="#3b324d" stroke-width="1"/>
-  <text x="640" y="663" font-family="Arial, sans-serif" font-size="16" fill="#9ca3af" text-anchor="middle">صفحة ${pageNum} من ${totalPages}</text>
+  <line x1="90" y1="635" x2="1190" y2="635" stroke="#3b2d54" stroke-width="1"/>
+  <text x="640" y="663" font-family="-apple-system, 'Segoe UI', Arial, sans-serif" font-size="16" fill="#9ca3af" text-anchor="middle">صفحة ${pageNum} من ${totalPages}</text>
 </svg>`;
 
   return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);

@@ -110,35 +110,64 @@ function splitIntoPages(rawText) {
   return pages.length ? pages : [cleanInline(rawText)];
 }
 
-function renderSvgPage(title, textChunk, pageNum, totalPages) {
-  const safeTitle = cleanText(title).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  const formattedHtml = textChunk
+function toTitleCase(str) {
+  if (!str) return "";
+  const minor = new Set(["a", "an", "the", "and", "but", "or", "for", "nor", "on", "at", "to", "from", "by", "of", "in", "with"]);
+  return str.split(" ").map((w, idx) => {
+    const lower = w.toLowerCase();
+    if (idx > 0 && minor.has(lower)) return lower;
+    return lower.charAt(0).toUpperCase() + lower.slice(1);
+  }).join(" ");
+}
+
+function cleanXmlEntities(str) {
+  return String(str || "")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/&rsquo;/gi, "'")
+    .replace(/&lsquo;/gi, "'")
+    .replace(/&rdquo;/gi, '"')
+    .replace(/&ldquo;/gi, '"')
+    .replace(/&#8211;/gi, "–")
+    .replace(/&#8212;/gi, "—")
+    .replace(/&mdash;/gi, "—")
+    .replace(/&#8230;/gi, "...")
+    .replace(/&hellip;/gi, "...")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\n\n/g, "<br/><br/>");
+    .replace(/>/g, "&gt;");
+}
+
+function renderSvgPage(title, textChunk, pageNum, totalPages) {
+  const safeTitle = cleanXmlEntities(toTitleCase(cleanText(title)));
+  const paragraphs = textChunk.split(/\n\n+/).filter(Boolean);
+  const formattedHtml = paragraphs.map(p => {
+    return `<p style="margin: 0 0 16px 0; text-indent: 1.5em; text-align: justify;">${cleanXmlEntities(p)}</p>`;
+  }).join("");
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#18181b"/>
-      <stop offset="100%" stop-color="#09090b"/>
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#030712"/>
     </linearGradient>
   </defs>
   <rect width="100%" height="100%" fill="url(#bg)"/>
-  <rect x="50" y="30" width="1180" height="660" rx="16" fill="#27272a" stroke="#3f3f46" stroke-width="1.5"/>
+  <rect x="50" y="30" width="1180" height="660" rx="16" fill="#111827" stroke="#1f2937" stroke-width="1.5"/>
   
-  <text x="640" y="78" font-family="'Segoe UI', Georgia, serif" font-size="22" font-weight="bold" fill="#fbbf24" text-anchor="middle">${safeTitle}</text>
-  <line x1="90" y1="102" x2="1190" y2="102" stroke="#3f3f46" stroke-width="1"/>
+  <text x="640" y="78" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Georgia', Roboto, sans-serif" font-size="22" font-weight="bold" fill="#fbbf24" text-anchor="middle">${safeTitle}</text>
+  <line x1="90" y1="102" x2="1190" y2="102" stroke="#1f2937" stroke-width="1"/>
 
   <foreignObject x="90" y="125" width="1100" height="495">
-    <div xmlns="http://www.w3.org/1999/xhtml" style="color: #f4f4f5; font-family: 'Segoe UI', Georgia, serif; font-size: 24px; line-height: 1.8; direction: ltr; text-align: left; padding: 10px 15px;">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Georgia', Roboto, sans-serif; font-size: 24px; line-height: 1.85; direction: ltr; padding: 10px 15px;">
       ${formattedHtml}
     </div>
   </foreignObject>
 
-  <line x1="90" y1="635" x2="1190" y2="635" stroke="#3f3f46" stroke-width="1"/>
-  <text x="640" y="663" font-family="Arial, sans-serif" font-size="16" fill="#a1a1aa" text-anchor="middle">Page ${pageNum} of ${totalPages}</text>
+  <line x1="90" y1="635" x2="1190" y2="635" stroke="#1f2937" stroke-width="1"/>
+  <text x="640" y="663" font-family="-apple-system, Arial, sans-serif" font-size="16" fill="#9ca3af" text-anchor="middle">Page ${pageNum} of ${totalPages} · Standard Ebooks</text>
 </svg>`;
 
   return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
@@ -155,7 +184,7 @@ function parseBooksFromHtml(html) {
     if (slug.startsWith("page") || slug === "downloads" || author === "tags" || author === "subjects") continue;
 
     const id = author + "/" + slug;
-    const title = stripHtml(m[4]) || slug.replace(/-/g, " ");
+    const title = toTitleCase(stripHtml(m[4]) || slug.replace(/-/g, " "));
     const cover = BASE + "/ebooks/" + author + "/" + slug + "/downloads/cover-thumbnail.jpg";
 
     out.push({

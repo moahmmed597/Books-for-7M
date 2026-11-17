@@ -23,70 +23,70 @@ const FEATURED_ARABIC_AUDIO = [
     title: "كتاب كليلة ودمنة (كامل 20 باباً وفصلاً)",
     author: "عبد الله بن المقفع وبيدبا الفيلسوف",
     description: "أعظم كتب الحكمة والأمثال والسياسة والأخلاق في التراث الإنساني، تسجيل صوتي كامل يضم جميع أبواب الكتاب وقصص الفيلسوف بيدبا والملك دبشليم.",
-    cover: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Kalila_wa_Dimna_manuscript.jpg/400px-Kalila_wa_Dimna_manuscript.jpg"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/kalila-wa-dimna.jpg"
   },
   {
     id: "100nights",
     title: "ألف ليلة وليلة (40 ليلة مسموعة)",
     author: "تراث الأدب العربي والشرقي",
     description: "أشهر حكايات وأساطير التراث الشرقي والعالمي بصوت درامي فخم؛ استمع لحكايات شهرزاد للملك شهريار في 40 ليلة كاملة.",
-    cover: "https://archive.org/services/img/100nights"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/1001-nights.jpg"
   },
   {
     id: "mijobooks14",
     title: "كتاب الأيام (السيرة الذاتية - طه حسين)",
     author: "طه حسين (عميد الأدب العربي)",
     description: "التحفة الأدبية الخالدة التي تروي قصة صعود وتحدي طه حسين وتغلبه على كف البصر ليصبح من أعظم قامات الفكر العربي الحديث.",
-    cover: "https://archive.org/services/img/mijobooks14"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/al-ayyam.jpg"
   },
   {
     id: "moharram1965_gmail_5_201712",
     title: "مقدمة ابن خلدون (المجالس الصوتية الكاملة)",
     author: "عبد الرحمن بن خلدون",
     description: "المجالس الصوتية الكاملة المتقنة لفصول مقدمة ابن خلدون ونظريات العمران البشري وطبائع الأمم ونشوء وسقوط الدول في 5 مجالس كبرى مطولة.",
-    cover: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Ibn_Khaldun_monument%2C_Tunis.jpg/400px-Ibn_Khaldun_monument%2C_Tunis.jpg"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/ibn-khaldun.jpg"
   },
   {
     id: "20220225_20220225_1824",
     title: "كتاب البخلاء (كامل مسموع - الجاحظ)",
     author: "أبو عثمان عمرو بن بحر الجاحظ",
     description: "أشهر كتب الأدب والفكاهة ودراسة النفس الإنسانية للجاحظ؛ تسجيل صوتي كامل ومتقن يمتد لأكثر من 9 ساعات متواصلة.",
-    cover: "https://archive.org/services/img/20220225_20220225_1824"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/al-bukhalaa.jpg"
   },
   {
     id: "Hay_Ibn_Yaqzan",
     title: "حي بن يقظان (الرواية الفلسفية التأسيسية)",
     author: "ابن طفيل الأندلسي",
     description: "أعظم رواية فلسفية في تاريخ الأدب العربي والأندلسي عن نشأة العقل البشري وإدراك الوجود والحقيقة عبر التأمل الذاتي الخالص.",
-    cover: "https://archive.org/services/img/Hay_Ibn_Yaqzan"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/hayy-ibn-yaqzan.jpg"
   },
   {
     id: "taw9_alhamama",
     title: "طوق الحمامة في الألفة والألّاف",
     author: "ابن حزم الأندلسي",
     description: "أدق وأجمل ما كُتب في التراث الأندلسي عن فلسفة الحب وعلاماته وأسبابه وطبائع النفوس الإنسانية بأصالة أدبية نادرة.",
-    cover: "https://archive.org/services/img/taw9_alhamama"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/tawq-al-hamama.jpg"
   },
   {
     id: "20190831_20190831_0834",
     title: "رواية نصف ميت دفن حيًا",
     author: "حسن الجندي (تسجيل صوتي كامل)",
     description: "رواية الرعب والتشويق الشهيرة للكاتب حسن الجندي، تأخذ المستمع في رحلة مرعبة وغامضة بين الواقع والمجهول.",
-    cover: "https://archive.org/services/img/20190831_20190831_0834"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/nisf-mayyit.svg"
   },
   {
     id: "20210730_20210730_2122",
     title: "كتاب العادات السبع للناس الأكثر فاعلية",
     author: "ستيفن كوفي (مسموع)",
     description: "أشهر كتب تطوير الذات والقيادة الشخصية في العالم، يشرح فيه كوفي المبادئ السبعة للتحول من التبعية إلى الفاعلية والاستقلال والنجاح المشترك.",
-    cover: "https://archive.org/services/img/20210730_20210730_2122"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/7-habits.jpg"
   },
   {
     id: "20200904_20200904_1156",
     title: "رواية أحلام ممنوعة",
     author: "نور عبد الحميد (رواية صوتية كاملة)",
     description: "رواية اجتماعية مشوقة تستكشف العلاقات الإنسانية والأحلام والآمال في الواقع المعاصر.",
-    cover: "https://archive.org/services/img/20200904_20200904_1156"
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/ahlam-mamnooa.svg"
   }
 ];
 

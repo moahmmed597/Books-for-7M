@@ -1,39 +1,29 @@
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36";
-const API_BASE = "https://librivox.org/api/feed/audiobooks";
+const SEARCH_BASE = "https://archive.org/advancedsearch.php";
+const META_BASE = "https://archive.org/metadata";
+const DEFAULT_COVER = "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/audiobook-default.svg";
 
 function cleanText(value) {
   return String(value || "").replace(/\s+/g, " ").trim();
 }
 
+function cleanTitle(val) {
+  return cleanText(val)
+    .replace(/,?\s+by\s+[^,]+$/i, "")
+    .replace(/^LibriVox\s+recording\s+of\s+/i, "")
+    .trim();
+}
+
 function stripHtml(value) {
   return cleanText(String(value || "")
-    .replace(/<br\s*\/?>/gi, "\n")
-    .replace(/<\/p>/gi, "\n\n")
+    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/<\/p>/gi, " ")
     .replace(/<[^>]+>/g, " ")
     .replace(/&nbsp;/gi, " ")
     .replace(/&quot;/gi, '"')
     .replace(/&#8211;/gi, "-")
     .replace(/&#8230;/gi, "...")
-    .replace(/&#39;/gi, "'")
-    .replace(/&rsquo;/gi, "'")
-    .replace(/&lsquo;/gi, "'")
-    .replace(/&rdquo;/gi, '"')
-    .replace(/&ldquo;/gi, '"')
-    .replace(/&mdash;/gi, "—"));
-}
-
-function extractCover(b) {
-  const zip = b.url_zip_file || "";
-  const m = zip.match(/archive\.org\/compress\/([^/]+)/);
-  if (m && m[1]) {
-    return "https://archive.org/services/img/" + m[1];
-  }
-  const libUrl = b.url_librivox || "";
-  const m2 = libUrl.match(/librivox\.org\/([^/]+)/);
-  if (m2 && m2[1]) {
-    return "https://archive.org/services/img/" + m2[1];
-  }
-  return "https://librivox.org/images/librivox-logo.png";
+    .replace(/&#39;/gi, "'"));
 }
 
 async function jsonGet(url) {
@@ -52,14 +42,15 @@ async function jsonGet(url) {
 
 async function popular(offset) {
   const off = parseInt(offset, 10) || 0;
-  const url = API_BASE + "/?format=json&limit=25&offset=" + off;
+  const page = Math.floor(off / 25) + 1;
+  const url = `${SEARCH_BASE}?q=collection:(librivoxaudio)+AND+mediatype:(audio)&fl[]=identifier,title,creator,description,downloads&sort[]=downloads+desc&rows=25&page=${page}&output=json`;
   const data = await jsonGet(url);
-  const books = (data && data.books) || [];
+  const docs = (data && data.response && data.response.docs) || [];
 
-  return books.map(b => ({
-    id: String(b.id),
-    title: cleanText(b.title),
-    cover: extractCover(b)
+  return docs.map(d => ({
+    id: d.identifier,
+    title: cleanTitle(d.title),
+    cover: `https://archive.org/services/img/${d.identifier}` || DEFAULT_COVER
   }));
 }
 
@@ -68,65 +59,66 @@ async function search(query, offset) {
   if (!q) return popular(offset);
 
   const off = parseInt(offset, 10) || 0;
-  const url = API_BASE + "/?title=" + encodeURIComponent(q) + "&format=json&limit=25&offset=" + off;
+  const page = Math.floor(off / 25) + 1;
+  const cleanQ = encodeURIComponent(q.replace(/[^\w\s]/g, " "));
+  const url = `${SEARCH_BASE}?q=collection:(librivoxaudio)+AND+(${cleanQ})&fl[]=identifier,title,creator,description,downloads&sort[]=downloads+desc&rows=25&page=${page}&output=json`;
   const data = await jsonGet(url);
-  const books = (data && data.books) || [];
+  const docs = (data && data.response && data.response.docs) || [];
 
-  return books.map(b => ({
-    id: String(b.id),
-    title: cleanText(b.title),
-    cover: extractCover(b)
+  return docs.map(d => ({
+    id: d.identifier,
+    title: cleanTitle(d.title),
+    cover: `https://archive.org/services/img/${d.identifier}` || DEFAULT_COVER
   }));
 }
 
 async function detail(id) {
-  const url = API_BASE + "/?id=" + encodeURIComponent(id) + "&format=json&extended=1";
+  const url = `${META_BASE}/${encodeURIComponent(id)}`;
   const data = await jsonGet(url);
-  const books = (data && data.books) || [];
-  if (!books.length) throw new Error("Audiobook not found: " + id);
-
-  const b = books[0];
-  const authors = (b.authors || [])
-    .map(a => `${a.first_name || ""} ${a.last_name || ""}`.trim())
-    .filter(Boolean)
-    .join(", ");
+  const meta = (data && data.metadata) || {};
 
   return {
-    id: String(b.id),
-    title: cleanText(b.title),
-    cover: extractCover(b),
-    description: stripHtml(b.description),
-    author: authors || "LibriVox Narrator",
+    id: id,
+    title: cleanTitle(meta.title) || id,
+    cover: `https://archive.org/services/img/${id}` || DEFAULT_COVER,
+    description: stripHtml(meta.description || "LibriVox volunteer recording of classic world literature."),
+    author: cleanText(meta.creator || "LibriVox Volunteers"),
     status: "completed"
   };
 }
 
-// Audio-only book: chapters() returns [] so 7M shows 🎧 Listen only
 async function chapters(id) {
   return [];
 }
 
-async function pageUrls(chapterId) {
-  return [];
-}
-
-// audioTracks returns the full list of MP3 chapter tracks with seeking enabled
 async function audioTracks(id) {
-  const url = API_BASE + "/?id=" + encodeURIComponent(id) + "&format=json&extended=1";
+  const url = `${META_BASE}/${encodeURIComponent(id)}`;
   const data = await jsonGet(url);
-  const books = (data && data.books) || [];
-  if (!books.length) return [];
+  const files = (data && data.files) || [];
 
-  const b = books[0];
-  const sections = b.sections || [];
+  const mp3s = files.filter(f => f.name && f.name.toLowerCase().endsWith(".mp3"));
+  if (!mp3s.length) return [];
 
-  return sections.map((s, idx) => ({
-    id: String(s.id || idx + 1),
-    title: cleanText(s.title || ("Chapter " + (idx + 1))),
-    url: s.listen_url, // direct MP3 streaming from Archive.org
-    duration: parseInt(s.playtime, 10) || 0,
-    chapter: String(idx + 1)
-  }));
+  const originals = mp3s.filter(f => f.source === "original");
+  const chosen = originals.length > 0 ? originals : mp3s.filter(f => !f.name.toLowerCase().endsWith("_vbr.mp3"));
+  const finalFiles = chosen.length > 0 ? chosen : mp3s;
+
+  finalFiles.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }));
+
+  return finalFiles.map((f, idx) => {
+    const rawTitle = f.title || f.name.replace(/\.[^/.]+$/, "");
+    let dur = 0;
+    if (f.length) {
+      dur = Math.round(parseFloat(f.length));
+    }
+    return {
+      id: `${id}-tr-${idx + 1}`,
+      title: cleanText(rawTitle),
+      url: `https://archive.org/download/${id}/${encodeURIComponent(f.name)}`,
+      duration: dur,
+      chapter: String(idx + 1)
+    };
+  });
 }
 
 const plugin = {
@@ -136,8 +128,7 @@ const plugin = {
   search,
   detail,
   chapters,
-  pageUrls,
-  audioTracks
+  audioTracks,
 };
 
 return plugin;

@@ -93,7 +93,7 @@ const SPACE_SCIENCE_BOOKS = [
     title: "كتاب زيج الصابئ (علم الفلك وحركات الكواكب والنجوم)",
     author: "محمد بن جابر بن سنان البتاني (أشهر علماء الفلك)",
     description: "أعظم كتاب تراثي في علم الفلك وحساب حركات الكواكب ومواقع النجوم والكسوف والخسوف وأبعاد الأجرام السماوية.",
-    cover: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Al-Battani.jpg/400px-Al-Battani.jpg",
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/zij-al-sabi.jpg",
     source: "shamela"
   },
   {
@@ -101,7 +101,7 @@ const SPACE_SCIENCE_BOOKS = [
     title: "كتاب الأنواء في مواسم العرب وعلم الفلك والنجوم",
     author: "ابن قتيبة الدينوري",
     description: "مرجع كلاسيكي شامل في دراسة السماء، ومطالع النجوم، والأبراج، وحركة الفصول وتقلبات الطقس والكون.",
-    cover: "https://shamela.ws/favicon.ico",
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/kitab-al-anwaa.svg",
     source: "shamela"
   },
   {
@@ -109,7 +109,7 @@ const SPACE_SCIENCE_BOOKS = [
     title: "رسائل فلسفية في المكان والزمان والفضاء الكوني",
     author: "أبو بكر محمد بن زكريا الرازي",
     description: "أبحاث فلسفية وعلمية عميقة تناقش الفضاء والزمان المطلق وطبيعة الفراغ الكوني والمادة والحركة.",
-    cover: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Rhazes.jpg/400px-Rhazes.jpg",
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/al-razi-falsafa.jpg",
     source: "shamela"
   },
   {
@@ -117,7 +117,7 @@ const SPACE_SCIENCE_BOOKS = [
     title: "الجماهر في معرفة الجواهر (علوم الطبيعة والمادة)",
     author: "أبو الريحان البيروني",
     description: "كتاب رائد في فيزياء وخصائص المادة الطبيعية والكثافة النوعية والمعادن وعلم الطبيعة التجريبي.",
-    cover: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Abu_Rayhan_al-Biruni.jpg/400px-Abu_Rayhan_al-Biruni.jpg",
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/al-biruni-jawahir.jpg",
     source: "shamela"
   },
   {
@@ -125,7 +125,7 @@ const SPACE_SCIENCE_BOOKS = [
     title: "The Origin of Species (أصل الأنواع)",
     author: "Charles Darwin",
     description: "الكتاب العلمي الأكثر تأثيراً في تاريخ العلوم الحديثة وتطور الأحياء وتفسير تنوع الكائنات الحية على كوكب الأرض.",
-    cover: "https://standardebooks.org/ebooks/charles-darwin/the-origin-of-species/downloads/cover-thumbnail.jpg",
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/origin-of-species.jpg",
     source: "standard-ebooks"
   },
   {
@@ -133,7 +133,7 @@ const SPACE_SCIENCE_BOOKS = [
     title: "Science and the Modern World (العلم والعالم الحديث)",
     author: "Alfred North Whitehead",
     description: "دراسة فلسفية وعلمية كبرى حول تطور الثورة العلمية ونشأة مفاهيم المكان والزمان والفيزياء الحديثة.",
-    cover: "https://standardebooks.org/ebooks/alfred-north-whitehead/science-and-the-modern-world/downloads/cover-thumbnail.jpg",
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/science-modern-world.jpg",
     source: "standard-ebooks"
   },
   {
@@ -141,7 +141,7 @@ const SPACE_SCIENCE_BOOKS = [
     title: "The Voyage of the Beagle (رحلة سفينة البيجل)",
     author: "Charles Darwin",
     description: "يوميات الرحلة الاستكشافية الكبرى حول العالم واستكشاف الطبيعة والجيولوجيا والمحيطات والجزر المجهولة.",
-    cover: "https://standardebooks.org/ebooks/charles-darwin/the-voyage-of-the-beagle/downloads/cover-thumbnail.jpg",
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/voyage-beagle.jpg",
     source: "standard-ebooks"
   },
   {
@@ -149,7 +149,7 @@ const SPACE_SCIENCE_BOOKS = [
     title: "The Problems of Philosophy (مشكلات الفلسفة والكون)",
     author: "Bertrand Russell",
     description: "مقدمة فلسفية تأسيسية تبحث في طبيعة المادة، ونظرية المعرفة، وإدراك الإنسان للكون والواقع الفيزيائي.",
-    cover: "https://standardebooks.org/ebooks/bertrand-russell/the-problems-of-philosophy/downloads/cover-thumbnail.jpg",
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/problems-philosophy.jpg",
     source: "standard-ebooks"
   },
   {
@@ -157,7 +157,7 @@ const SPACE_SCIENCE_BOOKS = [
     title: "A Fighting Man of Mars (رحلة إلى كوكب المريخ)",
     author: "Edgar Rice Burroughs",
     description: "رواية علمية وخيالية تأخذ القارئ في مغامرة شيقة إلى أرجاء وتضاريس وفضاء كوكب المريخ.",
-    cover: "https://standardebooks.org/ebooks/edgar-rice-burroughs/a-fighting-man-of-mars/downloads/cover-thumbnail.jpg",
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/fighting-man-mars.jpg",
     source: "standard-ebooks"
   }
 ];
@@ -187,39 +187,61 @@ function splitIntoPages(rawText) {
   return pages.length ? pages : [cleanInline(rawText)];
 }
 
-function renderSvgPage(title, textChunk, pageNum, totalPages, isArabic) {
-  const safeTitle = cleanText(title).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  const formattedHtml = textChunk
+function cleanXmlEntities(str) {
+  return String(str || "")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/&rsquo;/gi, "'")
+    .replace(/&lsquo;/gi, "'")
+    .replace(/&rdquo;/gi, '"')
+    .replace(/&ldquo;/gi, '"')
+    .replace(/&#8211;/gi, "–")
+    .replace(/&#8212;/gi, "—")
+    .replace(/&mdash;/gi, "—")
+    .replace(/&#8230;/gi, "...")
+    .replace(/&hellip;/gi, "...")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\n\n/g, "<br/><br/>");
+    .replace(/>/g, "&gt;");
+}
 
+function renderSvgPage(title, textChunk, pageNum, totalPages, isArabic) {
+  const safeTitle = cleanXmlEntities(cleanText(title));
   const dir = isArabic ? "rtl" : "ltr";
   const align = isArabic ? "justify" : "left";
   const footerText = isArabic ? `صفحة ${pageNum} من ${totalPages}` : `Page ${pageNum} of ${totalPages}`;
+  const fontFamily = isArabic
+    ? "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Cairo', 'Noto Sans Arabic', 'Tajawal', Roboto, sans-serif"
+    : "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Georgia', Roboto, sans-serif";
+
+  const paragraphs = textChunk.split(/\n\n+/).filter(Boolean);
+  const formattedHtml = paragraphs.map(p => {
+    return `<p style="margin: 0 0 16px 0; text-indent: 1.5em; text-align: ${align}; line-height: ${isArabic ? 2.0 : 1.85};">${cleanXmlEntities(p)}</p>`;
+  }).join("");
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0a1128"/>
-      <stop offset="100%" stop-color="#020617"/>
+      <stop offset="0%" stop-color="#070d1e"/>
+      <stop offset="100%" stop-color="#02050e"/>
     </linearGradient>
   </defs>
   <rect width="100%" height="100%" fill="url(#bg)"/>
-  <rect x="50" y="30" width="1180" height="660" rx="16" fill="#0f172a" stroke="#1e293b" stroke-width="1.5"/>
+  <rect x="50" y="30" width="1180" height="660" rx="16" fill="#0c1427" stroke="#1e293b" stroke-width="1.5"/>
   
-  <text x="640" y="78" font-family="'Segoe UI', Tahoma, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="middle" direction="${dir}">${safeTitle}</text>
+  <text x="640" y="78" font-family="${fontFamily}" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="middle" direction="${dir}">${safeTitle}</text>
   <line x1="90" y1="102" x2="1190" y2="102" stroke="#1e293b" stroke-width="1"/>
 
   <foreignObject x="90" y="125" width="1100" height="495">
-    <div xmlns="http://www.w3.org/1999/xhtml" style="color: #e2e8f0; font-family: 'Segoe UI', Tahoma, Arial, sans-serif; font-size: 24px; line-height: 1.85; direction: ${dir}; text-align: ${align}; padding: 10px 15px;">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="color: #f8fafc; font-family: ${fontFamily}; font-size: 24px; direction: ${dir}; padding: 10px 15px;">
       ${formattedHtml}
     </div>
   </foreignObject>
 
   <line x1="90" y1="635" x2="1190" y2="635" stroke="#1e293b" stroke-width="1"/>
-  <text x="640" y="663" font-family="Arial, sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle">${footerText}</text>
+  <text x="640" y="663" font-family="-apple-system, Arial, sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle">${footerText}</text>
 </svg>`;
 
   return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);

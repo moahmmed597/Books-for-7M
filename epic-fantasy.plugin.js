@@ -63,7 +63,7 @@ const EPICS = [
     id: "game-of-thrones",
     title: "A Game of Thrones (صراع العروش - كاملة 72 فصلاً)",
     author: "George R. R. Martin",
-    cover: "https://upload.wikimedia.org/wikipedia/en/9/93/AGameOfThrones.jpg",
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/game-of-thrones.jpg",
     description: "الملحمة الكبرى لصراع العروش والعائلات الحاكمة (ستارك، لانيستر، وتارغاريان) على العرش الحديدي وقوى الشتاء والموت القادمة خلف الجدار.\n\nتدعم القراءة التلفزيونية لكامل الفصول الـ 72 مع الاستماع للكتاب الصوتي الكامل (33 ساعة).",
     url: "https://raw.githubusercontent.com/apoorva-sin/Game-Of-Thrones-Text-Generator/master/got.txt",
     type: "got"
@@ -72,7 +72,7 @@ const EPICS = [
     id: "the-witcher-last-wish",
     title: "The Witcher: The Last Wish (ذا ويتشر - الأمنية الأخيرة)",
     author: "Andrzej Sapkowski",
-    cover: "https://upload.wikimedia.org/wikipedia/en/7/78/The_Last_Wish_cover.jpg",
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/witcher.jpg",
     description: "البداية الأسطورية لمغامرات صائد الوحوش جيرالت أوف ريفيا؛ مواجهة اللعنات، الوحوش السحرية، والأقدار الغامضة وقصة لقائه الأول مع الساحرة ينيفِر.\n\nتدعم القراءة التلفزيونية لجميع قصص جيرالت مع الاستماع للكتاب الصوتي الكامل (10 ساعات).",
     url: "https://archive.org/download/witcher2swordofdestiny/%28Witcher%201%29The%20Last%20Wish_djvu.txt",
     type: "witcher"
@@ -81,7 +81,7 @@ const EPICS = [
     id: "dune-epic",
     title: "Dune (كثيب - ملحمة كوكب أراكيس وفضاء الرمال)",
     author: "Frank Herbert",
-    cover: "https://upload.wikimedia.org/wikipedia/en/d/de/Dune-Frank_Herbert_%281965%29_First_edition.jpg",
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/dune.jpg",
     description: "أعظم رواية خيال علمي وفضاء ملحمي في التاريخ؛ صراع السلالات النبيلة (آل آتريدس وآل هاركونن) على كوكب أراكيس ومستقبل البشرية مع بول آتريدس (مؤدّب).\n\nتدعم القراءة التلفزيونية والاستماع المتزامن لـ 52 فصلاً صوتياً كاملاً.",
     url: "https://raw.githubusercontent.com/eaxworthy/dune_nlp/master/data/prepared_texts/dune.txt",
     type: "dune"
@@ -90,7 +90,7 @@ const EPICS = [
     id: "the-walking-dead",
     title: "The Walking Dead (الموتى السائرون - صعود الحاكم)",
     author: "Robert Kirkman & Jay Bonansinga",
-    cover: "https://upload.wikimedia.org/wikipedia/en/9/9f/The_Walking_Dead_Issue_1.jpg",
+    cover: "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/covers/walking-dead.jpg",
     description: "ملحمة نهاية العالم وعالم الموتى السائرون (الزومبي) ونجاة ريك غرايمز والناجين، وتأسيس بلدة وودبري وصعود الحاكم (The Governor).\n\nتدعم القراءة التلفزيونية والاستماع الصوتي الكامل للرواية (أكثر من 10 ساعات).",
     url: "https://archive.org/download/the-walking-dead-days-gone-bye-f9b714/the-walking-dead-days-gone-bye-f9b714_djvu.txt",
     type: "walking-dead"
@@ -508,35 +508,54 @@ function splitIntoPages(rawText) {
   return pages.length ? pages : [cleanInline(rawText)];
 }
 
-function renderSvgPage(title, textChunk, pageNum, totalPages) {
-  const safeTitle = cleanText(title).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  const formattedHtml = textChunk
+function cleanXmlEntities(str) {
+  return String(str || "")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/&rsquo;/gi, "'")
+    .replace(/&lsquo;/gi, "'")
+    .replace(/&rdquo;/gi, '"')
+    .replace(/&ldquo;/gi, '"')
+    .replace(/&#8211;/gi, "–")
+    .replace(/&#8212;/gi, "—")
+    .replace(/&mdash;/gi, "—")
+    .replace(/&#8230;/gi, "...")
+    .replace(/&hellip;/gi, "...")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\n\n/g, "<br/><br/>");
+    .replace(/>/g, "&gt;");
+}
+
+function renderSvgPage(title, textChunk, pageNum, totalPages) {
+  const safeTitle = cleanXmlEntities(cleanText(title));
+  const paragraphs = textChunk.split(/\n\n+/).filter(Boolean);
+  const formattedHtml = paragraphs.map(p => {
+    return `<p style="margin: 0 0 16px 0; text-indent: 1.5em; text-align: justify;">${cleanXmlEntities(p)}</p>`;
+  }).join("");
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#121824"/>
-      <stop offset="100%" stop-color="#070a10"/>
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#030712"/>
     </linearGradient>
   </defs>
   <rect width="100%" height="100%" fill="url(#bg)"/>
-  <rect x="50" y="30" width="1180" height="660" rx="16" fill="#182030" stroke="#2a3854" stroke-width="1.5"/>
+  <rect x="50" y="30" width="1180" height="660" rx="16" fill="#111827" stroke="#1f2937" stroke-width="1.5"/>
   
-  <text x="640" y="78" font-family="'Segoe UI', Georgia, serif" font-size="22" font-weight="bold" fill="#f59e0b" text-anchor="middle">${safeTitle}</text>
-  <line x1="90" y1="102" x2="1190" y2="102" stroke="#2a3854" stroke-width="1"/>
+  <text x="640" y="78" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Georgia', Roboto, sans-serif" font-size="22" font-weight="bold" fill="#f59e0b" text-anchor="middle">${safeTitle}</text>
+  <line x1="90" y1="102" x2="1190" y2="102" stroke="#1f2937" stroke-width="1"/>
 
   <foreignObject x="90" y="125" width="1100" height="495">
-    <div xmlns="http://www.w3.org/1999/xhtml" style="color: #f1f5f9; font-family: 'Segoe UI', Georgia, serif; font-size: 24px; line-height: 1.85; direction: ltr; text-align: left; padding: 10px 15px;">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Georgia', Roboto, sans-serif; font-size: 24px; line-height: 1.85; direction: ltr; padding: 10px 15px;">
       ${formattedHtml}
     </div>
   </foreignObject>
 
-  <line x1="90" y1="635" x2="1190" y2="635" stroke="#2a3854" stroke-width="1"/>
-  <text x="640" y="663" font-family="Arial, sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle">Page ${pageNum} of ${totalPages} · 7M Epic Reader</text>
+  <line x1="90" y1="635" x2="1190" y2="635" stroke="#1f2937" stroke-width="1"/>
+  <text x="640" y="663" font-family="-apple-system, Arial, sans-serif" font-size="16" fill="#9ca3af" text-anchor="middle">Page ${pageNum} of ${totalPages} · 7M Epic Reader</text>
 </svg>`;
 
   return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
@@ -682,13 +701,13 @@ async function pageUrls(chapterId) {
       "THE VOICE OF REASON 6",
       "THE LAST WISH"
     ];
-    const t = storyTitles[chIdx - 1] || storyTitles[0];
+    const t = storyTitles[chIdx - 1] || ("Story " + chIdx);
     chapterTitle = "The Witcher · " + t;
 
-    const startPos = fullText.toUpperCase().indexOf(t);
-    const nextT = storyTitles[chIdx];
-    const endPos = nextT ? fullText.toUpperCase().indexOf(nextT) : fullText.length;
-    chapterBody = fullText.substring(startPos, endPos > startPos ? endPos : (startPos + 40000));
+    const count = 12;
+    const chunkSize = Math.ceil(fullText.length / count);
+    const start = (chIdx - 1) * chunkSize;
+    chapterBody = fullText.substring(start, start + chunkSize);
   } else if (b.type === "dune") {
     chapterTitle = "Dune · Chapter " + chIdx;
     const count = 52;
