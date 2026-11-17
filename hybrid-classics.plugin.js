@@ -2,12 +2,33 @@ const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/
 const SE_BASE = "https://standardebooks.org";
 const LIBRIVOX_API = "https://librivox.org/api/feed/audiobooks";
 
+function cleanInline(value) {
+  return String(value || "").replace(/[ \t]+/g, " ").trim();
+}
+
 function cleanText(value) {
   return String(value || "").replace(/\s+/g, " ").trim();
 }
 
 function stripHtml(value) {
   return cleanText(String(value || "")
+    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/<\/p>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#8211;/gi, "-")
+    .replace(/&#8230;/gi, "...")
+    .replace(/&#39;/gi, "'")
+    .replace(/&rsquo;/gi, "'")
+    .replace(/&lsquo;/gi, "'")
+    .replace(/&rdquo;/gi, '"')
+    .replace(/&ldquo;/gi, '"')
+    .replace(/&mdash;/gi, "—"));
+}
+
+function cleanHtmlToParagraphs(html) {
+  const text = String(html || "")
     .replace(/<br\s*\/?>/gi, "\n")
     .replace(/<\/p>/gi, "\n\n")
     .replace(/<[^>]+>/g, " ")
@@ -20,7 +41,23 @@ function stripHtml(value) {
     .replace(/&lsquo;/gi, "'")
     .replace(/&rdquo;/gi, '"')
     .replace(/&ldquo;/gi, '"')
-    .replace(/&mdash;/gi, "—"));
+    .replace(/&mdash;/gi, "—");
+
+  const rawParas = text.split(/\n+/).map(p => cleanInline(p)).filter(Boolean);
+  const paras = [];
+  const MAX_WORDS = 170;
+
+  for (const p of rawParas) {
+    const words = p.split(/\s+/).filter(Boolean);
+    if (words.length <= MAX_WORDS) {
+      paras.push(words.join(" "));
+    } else {
+      for (let i = 0; i < words.length; i += MAX_WORDS) {
+        paras.push(words.slice(i, i + MAX_WORDS).join(" "));
+      }
+    }
+  }
+  return paras;
 }
 
 // Masterpieces that offer BOTH full-text TV reading AND matching audio narration
@@ -39,7 +76,7 @@ const HYBRID_BOOKS = [
     title: "Frankenstein; or, The Modern Prometheus",
     author: "Mary Wollstonecraft Shelley",
     sePath: "mary-shelley/frankenstein",
-    librivoxId: "40",
+    librivoxId: "2030",
     description: "الرواية التأسيسية لأدب الخيال العلمي؛ قصة فيكتور فرانكنشتاين وطموحه لصناعة الحياة والصراع المأساوي مع مخلوقه.",
     cover: "https://standardebooks.org/ebooks/mary-shelley/frankenstein/downloads/cover-thumbnail.jpg"
   },
@@ -48,7 +85,7 @@ const HYBRID_BOOKS = [
     title: "The Time Machine (آلة الزمن)",
     author: "H. G. Wells",
     sePath: "h-g-wells/the-time-machine",
-    librivoxId: "77",
+    librivoxId: "5618",
     description: "رحلة ملحمية عبر الزمان إلى مستقبل البشرية السحيق؛ استكشف حضارة الإيلوي والمورلوك تحت الأرض نصاً وصوتاً.",
     cover: "https://standardebooks.org/ebooks/h-g-wells/the-time-machine/downloads/cover-thumbnail.jpg"
   },
@@ -57,7 +94,7 @@ const HYBRID_BOOKS = [
     title: "A Study in Scarlet (دراسة في القرمزي - شارلوك هولمز)",
     author: "Arthur Conan Doyle",
     sePath: "arthur-conan-doyle/a-study-in-scarlet",
-    librivoxId: "56",
+    librivoxId: "2452",
     description: "أول ظهور للأسطورة شارلوك هولمز والدكتور واطسون في 221B بيكر ستريت؛ أول لغز جريمة غامضة يبهر العالم بأسلوب الاستنتاج الباهر.",
     cover: "https://standardebooks.org/ebooks/arthur-conan-doyle/a-study-in-scarlet/downloads/cover-thumbnail.jpg"
   },
@@ -66,7 +103,7 @@ const HYBRID_BOOKS = [
     title: "The Picture of Dorian Gray (صورة دوريان غراي)",
     author: "Oscar Wilde",
     sePath: "oscar-wilde/the-picture-of-dorian-gray",
-    librivoxId: "148",
+    librivoxId: "6124",
     description: "رواية أوسكار وايلد الفلسفية الشهيرة عن الفن والجمال الأبدي وثمن بيع الروح للشباب الدائم.",
     cover: "https://standardebooks.org/ebooks/oscar-wilde/the-picture-of-dorian-gray/downloads/cover-thumbnail.jpg"
   }
@@ -102,15 +139,15 @@ async function jsonGet(url) {
 
 // TV Book Page Renderer (16:9 widescreen dark mode SVG pages)
 function splitIntoPages(rawText) {
-  const clean = stripHtml(rawText);
-  const paragraphs = clean.split(/\n+/).map(p => p.trim()).filter(Boolean);
+  const paras = cleanHtmlToParagraphs(rawText);
   const pages = [];
   let currentChunk = [];
   let currentWordCount = 0;
+  const TARGET_WORDS = 170;
 
-  for (const p of paragraphs) {
-    const words = p.split(/\s+/).length;
-    if (currentWordCount + words > 240 && currentChunk.length > 0) {
+  for (const p of paras) {
+    const words = p.split(/\s+/).filter(Boolean).length;
+    if (currentWordCount + words > TARGET_WORDS && currentChunk.length > 0) {
       pages.push(currentChunk.join("\n\n"));
       currentChunk = [p];
       currentWordCount = words;
@@ -122,7 +159,7 @@ function splitIntoPages(rawText) {
   if (currentChunk.length > 0) {
     pages.push(currentChunk.join("\n\n"));
   }
-  return pages.length ? pages : [clean];
+  return pages.length ? pages : [cleanInline(rawText)];
 }
 
 function renderSvgPage(title, textChunk, pageNum, totalPages) {
@@ -255,18 +292,33 @@ async function audioTracks(id) {
   if (!books.length) return [];
 
   const sections = books[0].sections || [];
-  return sections.map((s, idx) => ({
-    id: String(s.id || idx + 1),
-    title: cleanText(s.title || ("Chapter " + (idx + 1))),
-    url: s.listen_url, // direct MP3 link
-    duration: parseInt(s.playtime, 10) || 0,
-    chapter: String(idx + 1) // links reading and listening
-  }));
+  return sections.map((s, idx) => {
+    // Determine chapter number to match reading
+    let chNumber = String(idx + 1);
+    if (b.id === "the-picture-of-dorian-gray") {
+      // In 6124: section 0 is Preface, section 1 is Chapter 1, matching SE's 20 chapters
+      chNumber = String(idx);
+    } else {
+      const match = (s.title || "").match(/chapter\s+(\d+)/i);
+      if (match) {
+        chNumber = String(parseInt(match[1], 10));
+      }
+    }
+
+    return {
+      id: String(s.id || idx + 1),
+      title: cleanText(s.title || ("Chapter " + (idx + 1))),
+      url: s.listen_url, // direct MP3 link
+      duration: parseInt(s.playtime, 10) || 0,
+      chapter: chNumber // links reading and listening
+    };
+  });
 }
 
 const plugin = {
   id: "hybrid-classics",
   name: "اقرأ واستمع معاً (Hybrid Classics - Read & Listen)",
+  version: "2.0.0",
   popular,
   search,
   detail,

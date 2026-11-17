@@ -2,12 +2,33 @@ const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/
 const SHAMELA_BASE = "https://shamela.ws";
 const SE_BASE = "https://standardebooks.org";
 
+function cleanInline(value) {
+  return String(value || "").replace(/[ \t]+/g, " ").trim();
+}
+
 function cleanText(value) {
   return String(value || "").replace(/\s+/g, " ").trim();
 }
 
 function stripHtml(value) {
   return cleanText(String(value || "")
+    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/<\/p>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#8211;/gi, "-")
+    .replace(/&#8230;/gi, "...")
+    .replace(/&#39;/gi, "'")
+    .replace(/&rsquo;/gi, "'")
+    .replace(/&lsquo;/gi, "'")
+    .replace(/&rdquo;/gi, '"')
+    .replace(/&ldquo;/gi, '"')
+    .replace(/&mdash;/gi, "—"));
+}
+
+function cleanHtmlToParagraphs(html) {
+  const text = String(html || "")
     .replace(/<br\s*\/?>/gi, "\n")
     .replace(/<\/p>/gi, "\n\n")
     .replace(/<[^>]+>/g, " ")
@@ -20,7 +41,23 @@ function stripHtml(value) {
     .replace(/&lsquo;/gi, "'")
     .replace(/&rdquo;/gi, '"')
     .replace(/&ldquo;/gi, '"')
-    .replace(/&mdash;/gi, "—"));
+    .replace(/&mdash;/gi, "—");
+
+  const rawParas = text.split(/\n+/).map(p => cleanInline(p)).filter(Boolean);
+  const paras = [];
+  const MAX_WORDS = 170;
+
+  for (const p of rawParas) {
+    const words = p.split(/\s+/).filter(Boolean);
+    if (words.length <= MAX_WORDS) {
+      paras.push(words.join(" "));
+    } else {
+      for (let i = 0; i < words.length; i += MAX_WORDS) {
+        paras.push(words.slice(i, i + MAX_WORDS).join(" "));
+      }
+    }
+  }
+  return paras;
 }
 
 function uniq(items, keyFn) {
@@ -127,15 +164,15 @@ const SPACE_SCIENCE_BOOKS = [
 
 // TV Book Page Renderer (16:9 widescreen dark mode SVG pages)
 function splitIntoPages(rawText) {
-  const clean = stripHtml(rawText);
-  const paragraphs = clean.split(/\n+/).map(p => p.trim()).filter(Boolean);
+  const paras = cleanHtmlToParagraphs(rawText);
   const pages = [];
   let currentChunk = [];
   let currentWordCount = 0;
+  const TARGET_WORDS = 170;
 
-  for (const p of paragraphs) {
-    const words = p.split(/\s+/).length;
-    if (currentWordCount + words > 220 && currentChunk.length > 0) {
+  for (const p of paras) {
+    const words = p.split(/\s+/).filter(Boolean).length;
+    if (currentWordCount + words > TARGET_WORDS && currentChunk.length > 0) {
       pages.push(currentChunk.join("\n\n"));
       currentChunk = [p];
       currentWordCount = words;
@@ -147,7 +184,7 @@ function splitIntoPages(rawText) {
   if (currentChunk.length > 0) {
     pages.push(currentChunk.join("\n\n"));
   }
-  return pages.length ? pages : [clean];
+  return pages.length ? pages : [cleanInline(rawText)];
 }
 
 function renderSvgPage(title, textChunk, pageNum, totalPages, isArabic) {
@@ -327,6 +364,7 @@ async function pageUrls(chapterId) {
 const plugin = {
   id: "space-and-science",
   name: "كتب الفضاء والعلوم الطبيعية (Space & Science)",
+  version: "2.0.0",
   popular,
   search,
   detail,

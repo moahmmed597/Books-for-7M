@@ -7,8 +7,8 @@ function cleanText(value) {
 
 function stripHtml(value) {
   return cleanText(String(value || "")
-    .replace(/<br\s*\/?>/gi, "\n")
-    .replace(/<\/p>/gi, "\n\n")
+    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/<\/p>/gi, " ")
     .replace(/<[^>]+>/g, " ")
     .replace(/&nbsp;/gi, " ")
     .replace(/&quot;/gi, '"')
@@ -19,32 +19,18 @@ function stripHtml(value) {
 
 const FEATURED_ARABIC_AUDIO = [
   {
-    id: "20191021_20191021_1524",
-    title: "رواية جريمة في قطار الشرق السريع (أجاثا كريستي)",
-    author: "أجاثا كريستي (ترجمة وصوت عربي)",
-    description: "أشهر روايات التحقيق والغموض العالمية؛ لغز جريمة القتل الغامضة في قطار الشرق السريع والتحقيق الاستثنائي للمحقق هرقل بوارو.",
-    cover: "https://archive.org/services/img/20191021_20191021_1524"
+    id: "kalila-wa-dimna-audiobook",
+    title: "كتاب كليلة ودمنة (كامل 20 باباً وفصلاً)",
+    author: "عبد الله بن المقفع وبيدبا الفيلسوف",
+    description: "أعظم كتب الحكمة والأمثال والسياسة والأخلاق في التراث الإنساني، تسجيل صوتي كامل يضم جميع أبواب الكتاب وقصص الفيلسوف بيدبا والملك دبشليم.",
+    cover: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Kalila_wa_Dimna_manuscript.jpg/400px-Kalila_wa_Dimna_manuscript.jpg"
   },
   {
-    id: "20200905_20200905_0907",
-    title: "رواية الزوج الأبدي (فيودور ديستويفسكي)",
-    author: "فيودور ديستويفسكي (كتاب صوتي كامل)",
-    description: "رواية نفسية عميقة لديستويفسكي تستعرض الصراع النفسي بين الزوج الأبدي والعاشق والمشاعر الإنسانية المعقدة.",
-    cover: "https://archive.org/services/img/20200905_20200905_0907"
-  },
-  {
-    id: "20190831_20190831_0834",
-    title: "رواية نصف ميت دفن حيًا",
-    author: "حسن الجندي (تسجيل صوتي كامل)",
-    description: "رواية الرعب والتشويق الشهيرة للكاتب حسن الجندي، تأخذ المستمع في رحلة مرعبة وغامضة بين الواقع والمجهول.",
-    cover: "https://archive.org/services/img/20190831_20190831_0834"
-  },
-  {
-    id: "20210730_20210730_2122",
-    title: "كتاب العادات السبع للناس الأكثر فاعلية",
-    author: "ستيفن كوفي (مسموع)",
-    description: "أشهر كتب تطوير الذات والقيادة الشخصية في العالم، يشرح فيه كوفي المبادئ السبعة للتحول من التبعية إلى الفاعلية والاستقلال والنجاح المشترك.",
-    cover: "https://archive.org/services/img/20210730_20210730_2122"
+    id: "100nights",
+    title: "ألف ليلة وليلة (40 ليلة مسموعة)",
+    author: "تراث الأدب العربي والشرقي",
+    description: "أشهر حكايات وأساطير التراث الشرقي والعالمي بصوت درامي فخم؛ استمع لحكايات شهرزاد للملك شهريار في 40 ليلة كاملة.",
+    cover: "https://archive.org/services/img/100nights"
   },
   {
     id: "mijobooks14",
@@ -54,25 +40,32 @@ const FEATURED_ARABIC_AUDIO = [
     cover: "https://archive.org/services/img/mijobooks14"
   },
   {
-    id: "1_20191028_20191028_0941",
-    title: "حكايات ألف ليلة وليلة المسموعة",
-    author: "تراث الأدب العربي والعالمي",
-    description: "أشهر الحكايات والأساطير الشرقية المسموعة من بغداد ودمشق والقاهرة، تحكيها شهرزاد للملك شهريار.",
-    cover: "https://archive.org/services/img/1_20191028_20191028_0941"
-  },
-  {
-    id: "diwan_20170911_2151",
-    title: "مقدمة ابن خلدون (التسجيل الصوتي الكامل)",
+    id: "moharram1965_gmail_5_201712",
+    title: "مقدمة ابن خلدون (المجالس الصوتية الكاملة)",
     author: "عبد الرحمن بن خلدون",
-    description: "استمع لقراءة صوتية واضحة ومتقنة لفصول مقدمة ابن خلدون ونظريات العمران البشري وطبائع الأمم ونشوء وسقوط الدول.",
-    cover: "https://archive.org/services/img/diwan_20170911_2151"
+    description: "المجالس الصوتية الكاملة المتقنة لفصول مقدمة ابن خلدون ونظريات العمران البشري وطبائع الأمم ونشوء وسقوط الدول في 5 مجالس كبرى مطولة.",
+    cover: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Ibn_Khaldun_monument%2C_Tunis.jpg/400px-Ibn_Khaldun_monument%2C_Tunis.jpg"
   },
   {
-    id: "20200904_20200904_1156",
-    title: "رواية أحلام ممنوعة",
-    author: "نور عبد الحميد (رواية صوتية كاملة)",
-    description: "رواية اجتماعية مشوقة تستكشف العلاقات الإنسانية والأحلام والآمال في الواقع المعاصر.",
-    cover: "https://archive.org/services/img/20200904_20200904_1156"
+    id: "20220225_20220225_1824",
+    title: "كتاب البخلاء (كامل مسموع - الجاحظ)",
+    author: "أبو عثمان عمرو بن بحر الجاحظ",
+    description: "أشهر كتب الأدب والفكاهة ودراسة النفس الإنسانية للجاحظ؛ تسجيل صوتي كامل ومتقن يمتد لأكثر من 9 ساعات متواصلة.",
+    cover: "https://archive.org/services/img/20220225_20220225_1824"
+  },
+  {
+    id: "Hay_Ibn_Yaqzan",
+    title: "حي بن يقظان (الرواية الفلسفية التأسيسية)",
+    author: "ابن طفيل الأندلسي",
+    description: "أعظم رواية فلسفية في تاريخ الأدب العربي والأندلسي عن نشأة العقل البشري وإدراك الوجود والحقيقة عبر التأمل الذاتي الخالص.",
+    cover: "https://archive.org/services/img/Hay_Ibn_Yaqzan"
+  },
+  {
+    id: "taw9_alhamama",
+    title: "طوق الحمامة في الألفة والألّاف",
+    author: "ابن حزم الأندلسي",
+    description: "أدق وأجمل ما كُتب في التراث الأندلسي عن فلسفة الحب وعلاماته وأسبابه وطبائع النفوس الإنسانية بأصالة أدبية نادرة.",
+    cover: "https://archive.org/services/img/taw9_alhamama"
   }
 ];
 
@@ -102,40 +95,13 @@ async function search(query, offset) {
   const q = cleanText(query).toLowerCase();
   if (!q) return popular(offset);
 
-  // Search curated list first
   const matched = FEATURED_ARABIC_AUDIO.filter(b =>
     b.title.toLowerCase().includes(q) ||
     b.author.toLowerCase().includes(q) ||
     b.description.toLowerCase().includes(q)
   );
 
-  if (matched.length > 0) {
-    return matched.map(b => ({
-      id: b.id,
-      title: b.title,
-      cover: b.cover
-    }));
-  }
-
-  // Dynamic Archive.org Arabic Audio Search
-  try {
-    const archiveUrl = ARCHIVE_BASE + "/advancedsearch.php?q=" +
-      encodeURIComponent('mediatype:audio AND language:ara AND (title:"' + q + '" OR description:"' + q + '")') +
-      "&fl[]=identifier,title,creator,description&rows=15&output=json";
-    const data = await jsonGet(archiveUrl);
-    const docs = (data && data.response && data.response.docs) || [];
-    if (docs.length > 0) {
-      return docs.map(d => ({
-        id: d.identifier,
-        title: cleanText(d.title || d.identifier),
-        cover: "https://archive.org/services/img/" + d.identifier
-      }));
-    }
-  } catch (e) {
-    // Ignore search network error fallback
-  }
-
-  return FEATURED_ARABIC_AUDIO.map(b => ({
+  return (matched.length > 0 ? matched : FEATURED_ARABIC_AUDIO).map(b => ({
     id: b.id,
     title: b.title,
     cover: b.cover
@@ -155,7 +121,6 @@ async function detail(id) {
     };
   }
 
-  // Fallback Archive.org metadata lookup
   const data = await jsonGet(ARCHIVE_BASE + "/metadata/" + encodeURIComponent(id));
   const meta = (data && data.metadata) || {};
 
@@ -182,7 +147,14 @@ async function audioTracks(id) {
   const data = await jsonGet(ARCHIVE_BASE + "/metadata/" + encodeURIComponent(id));
   const files = (data && data.files) || [];
 
-  const mp3s = files.filter(f => f.name && f.name.toLowerCase().endsWith(".mp3"));
+  // 1. Keep only files with source: original to avoid duplicate derivative MP3s
+  let mp3s = files.filter(f => f.name && f.name.toLowerCase().endsWith(".mp3") && f.source === "original");
+  if (!mp3s.length) {
+    mp3s = files.filter(f => f.name && f.name.toLowerCase().endsWith(".mp3") && !f.name.endsWith("_vbr.mp3") && !f.name.includes("_64kb"));
+  }
+
+  // 2. Natural sort on file name so Part 1, Part 2, ... Part 10 are in correct chronological order
+  mp3s.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }));
 
   return mp3s.map((f, idx) => {
     const rawName = f.name.replace(/\.mp3$/i, "").replace(/[-_+]/g, " ").trim();
@@ -202,7 +174,8 @@ async function audioTracks(id) {
 
 const plugin = {
   id: "arabic-audiobooks",
-  name: "المكتبة الصوتية العربية (روايات وفكر وتطوير الذات)",
+  name: "المكتبة الصوتية العربية التراثية والفكرية (Arabic Heritage Audiobooks)",
+  version: "2.0.0",
   popular,
   search,
   detail,
