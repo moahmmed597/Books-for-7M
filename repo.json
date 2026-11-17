@@ -2,8 +2,26 @@
   "name": "7M Books & Novels - كتب وروايات",
   "author": "7M Team",
   "description": "مستودع الكتب والروايات المترجمة والعالمية لتطبيق 7M على الشاشات الذكية مع محرك العرض عالي الدقة",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "plugins": [
+    {
+      "id": "intellectual-books-ar",
+      "name": "روائع الفكر والفلسفة (Arabic Philosophy & Thought)",
+      "version": "1.0.0",
+      "description": "أمهات كتب الفلسفة، المنطق، ونظريات المعرفة والعمران البشري (مقدمة ابن خلدون، تهافت الفلاسفة، كليلة ودمنة، المغالطات المنطقية)",
+      "author": "7M",
+      "icon": "https://shamela.ws/favicon.ico",
+      "scriptUrl": "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/intellectual-books-ar.plugin.js"
+    },
+    {
+      "id": "space-and-science",
+      "name": "كتب الفضاء والعلوم الطبيعية (Space & Science)",
+      "version": "1.0.0",
+      "description": "أعظم كتب الفلك والفضاء والكون والعلوم الطبيعية (زيج الصابئ في حركات الكواكب، الأنواء والنجوم، أصل الأنواع، العلم والعالم الحديث)",
+      "author": "7M",
+      "icon": "https://shamela.ws/favicon.ico",
+      "scriptUrl": "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/space-and-science.plugin.js"
+    },
     {
       "id": "kolnovel-ar",
       "name": "ملوك الروايات (KolNovel - شامل)",
