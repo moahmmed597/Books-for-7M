@@ -2,7 +2,7 @@
   "name": "7M Books & Audiobooks - كتب وروايات مسموعة ومقروءة",
   "author": "7M",
   "description": "المستودع الرسمي المتكامل للكتب والروايات المقروءة والمسموعة لتطبيق 7M على الشاشات الذكية (يدعم قراءة واستماع)",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "plugins": [
     {
       "id": "librivox-en",
@@ -138,14 +138,14 @@
     },
     {
       "id": "epic-fantasy",
-      "name": "سجلات الفانتازيا والعرش (Game of Thrones & The Witcher & Dune)",
-      "version": "1.0.0",
+      "name": "سجلات الفانتازيا والعرش (Game of Thrones & The Witcher & Dune & The Walking Dead)",
+      "version": "1.1.0",
       "lang": "en",
       "nsfw": false,
       "icon": "https://upload.wikimedia.org/wikipedia/en/9/93/AGameOfThrones.jpg",
       "entry": "epic-fantasy.plugin.js",
       "scriptUrl": "https://raw.githubusercontent.com/moahmmed597/Books-for-7M/main/epic-fantasy.plugin.js",
-      "description": "أعظم روايات الفانتازيا والملحمات العالمية (صراع العروش كاملة 72 فصلاً، ذا ويتشر: الأمنية الأخيرة، وملحمة كثيب Dune)"
+      "description": "أعظم روايات الفانتازيا والملحمات العالمية (صراع العروش، ذا ويتشر، كثيب، والموتى السائرون) - تدعم القراءة التلفزيونية والاستماع الصوتي المباشر معاً"
     }
   ]
 }
